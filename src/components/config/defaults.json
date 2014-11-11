@@ -1,0 +1,8 @@
+{
+    "pageUrl": "localhost:4000",
+    "timeout" : 300000,
+    "selenium" : {
+        "serverUrl" : "http://localhost:4444/wd/hub",
+        "browserType" : "chrome"
+    }
+}
