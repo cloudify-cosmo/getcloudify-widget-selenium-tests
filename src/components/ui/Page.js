@@ -1,37 +1,48 @@
 'use strict';
 
-
-var config = require('../config');
-var driver = require('../driver');
-
 var logger = require('log4js').getLogger('testLayout');
 
-/**
- *
- * @param relative
- * @returns {string}
- */
-function getPath(relative){
-
-//    if ( relative.indexOf('#/') < 0 ){
-//        relative = '#/' + relative;
-//    }
-//
-//    if ( relative.indexOf('#/') === 0 ){
-//        relative = '/index.html' + relative;
-//    }
-
-    logger.info("Navigating to url: "+'http://' + config.pageUrl + '/'+ relative);
-    return 'http://' + config.pageUrl + '/'+ relative;
-}
-
-function get( relative ){
-    driver.get().get(getPath(relative));
-}
-
-
-exports.loadWidgetPage  = function(){
-    get('widget.html');
+exports.loadWidgetPage  = function( mockIp ){
+    if ( mockIp ) {
+        browser.get('/widget.html?mockIp=' + mockIp );
+    }else{
+        browser.get('/widget.html');
+    }
 };
+
+exports.submit = function() {
+    return element(by.css('#tryNowBtn')).click();
+};
+
+
+exports.fillForm = function( name, email ) {
+    try {
+        logger.info('sending email');
+        return element(by.model('widgetController.email')).isDisplayed().then(function( displayed ){
+            if ( displayed ){
+
+                element(by.model('widgetController.email')).sendKeys(email);
+                return element(by.model('widgetController.name')).sendKeys(name);
+            }
+
+            logger.info('email is not visible');
+            return  element(by.model('widgetController.email')).isDisplayed();
+
+        });
+
+
+    }catch(e){
+        console.log('catch was triggered',e);
+    }
+
+};
+
+exports.getIp = function(){
+    return element(by.css('[ng-bind="widgetController.machineIp"]')).getText();
+
+};
+
+
+
 
 

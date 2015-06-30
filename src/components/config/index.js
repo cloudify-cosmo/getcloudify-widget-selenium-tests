@@ -18,7 +18,13 @@ var defaults = require(defaultsPath);
 
 var overridesPath = path.resolve(process.env.SYSTEM_TEST_CONF || path.resolve(__dirname, '..', '..', '..','dev','overrides.json'));
 logger.info('reading overrides from', overridesPath);
-var overrides = require(overridesPath);
+
+var overrides = {};
+try{
+    overrides = require(overridesPath);
+}catch(e){
+    console.log('could not read overrides at', overridesPath, 'using default configuration');
+}
 
 _.merge(exports, defaults, overrides);
 

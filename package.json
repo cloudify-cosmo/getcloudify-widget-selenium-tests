@@ -1,15 +1,18 @@
 {
   "dependencies": {
     "grunt": "~0.4.2",
-    "grunt-contrib-jshint": "^0.10.0",
     "grunt-jasmine-node": "^0.2.1",
-    "jasmine-node": "^1.11.0",
     "jshint-stylish": "^1.0.0",
     "lodash": "^2.4.1",
     "log4js": "^0.6.21",
-    "matchdep": "^0.3.0",
-    "q": "~1.0.1",
-    "selenium-webdriver": "~2.44.0"
+    "selenium-webdriver": "~2.44.0",
+    "grunt-protractor-runner": "~2.0.0",
+    "grunt-protractor-webdriver": "~0.2.0",
+    "load-grunt-tasks": "~3.1.0",
+    "protractor": "~2.0.0"
+  },
+  "scripts": {
+    "install": "node ./node_modules/protractor/bin/webdriver-manager update"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0"

@@ -2,7 +2,7 @@
 //var logger = require('log4js').getLogger('Gruntfile');
 
 module.exports = function (grunt) {
-    require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
         jshint: {
@@ -15,20 +15,40 @@ module.exports = function (grunt) {
                 'src/**/*.js'
             ]
         },
-        jasmine_node: {
-            options: {
-                specNameMatcher: 'spec',
-                extensions: 'js'
+        protractor:{
+            develop:{
+                options: {
+                    configFile:'protractor.conf.js'
+                }
+            },
+            automatic:{
+                options: {
+                    configFile: 'automatic.conf.js'
+                }
 
             },
+            applitools:{
+                options: {
+                    configFile: 'applitools.conf.js'
+                }
 
-            all: ['src/suites']
+            }
+        },
+        protractor_webdriver:{
+            start:{
+
+            }
         }
     });
 
-    grunt.registerTask('test', [ 'jasmine_node' ]);
+    grunt.registerTask('test', [ 'protractor_webdriver','protractor:automatic' ]);
+
+    grunt.registerTask('applitools', [ 'protractor_webdriver','protractor:applitools' ]);
 
     grunt.registerTask('build', [ 'jshint' ]);
 
-    grunt.registerTask('default', [ 'jshint', 'test' ]);
+    grunt.registerTask('default', [ 'build' ]);
+
+    grunt.registerTask('protract',[ 'protractor_webdriver','protractor:develop']);
+
 };
