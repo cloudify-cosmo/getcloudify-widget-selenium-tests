@@ -27,6 +27,7 @@ git checkout $GIT_BRANCH
 
 
 
+
 if [ ! -f /usr/bin/node ];then
     echo "installing node"
     NODEJS_VERSION=0.10.35
@@ -42,10 +43,19 @@ else
 fi
 
 if [ ! -f /usr/bin/java ];then
+    echo "installing java"
     sudo apt-get install openjdk-7-jre-headless -y
 else
     echo "java already instaled"
 fi
+
+if [ ! -f /usr/bin/phantomjs ]; then
+    echo "installing phantom"
+    sudo npm install -g phantomjs
+else
+    echo "phantomjs already installed"
+fi
+
 
 
 sudo npm install -g grunt-cli
