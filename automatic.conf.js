@@ -4,7 +4,7 @@ exports.config = {
 
     // Spec patterns are relative to the location of this config.
     specs: [
-        'spec/*_spec.js'
+        'spec/**/*_spec.js'
     ],
 
     onPrepare:function( ){
