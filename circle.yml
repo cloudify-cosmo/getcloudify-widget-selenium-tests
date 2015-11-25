@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 0.10.40
+
+dependencies:
+  override:
+    - gem install sass -v 3.4.5
+    - gem install compass
+    - npm install
+
+test:
+  override:
+    - npm test
+#
