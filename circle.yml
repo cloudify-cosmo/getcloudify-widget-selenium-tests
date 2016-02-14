@@ -21,3 +21,8 @@ test:
   override:
     - npm test
 
+deployment:
+  release:
+    tag: /.*/
+    commands:
+      - (true)
